@@ -1,0 +1,25 @@
+﻿@model Model.Product
+@Styles.Render("~/Styles/product.css")
+@Scripts.Render("~/Scripts/WhatsappSale.js")
+@{
+    ViewBag.Title = "Detalhes do Produto";
+}
+
+
+
+<div class=" text-white bg-dark mb-3 rounded-sm" id="product-detail">
+    <div class="container d-flex p-5 justify-content-between">
+
+        <img class="border rounded-lg mr-5" src="~/Images/Logo-v.svg" />
+        <div class="d-flex flex-column justify-content-between" id="product-descript">
+            <div class="d-flex flex-column">
+                <h2 class="size">@Html.DisplayFor(model => model.Brand) - @Html.DisplayFor(model => model.Model)</h2>
+                <h5 class="py-5">@Html.DisplayFor(model => model.Description)</h5>
+                <h3 class="">$@Html.DisplayFor(model => model.UnitaryPrice)</h3>
+            </div>
+            @Html.ActionLink("Fale com o vendedor", "Index", null, new { onclick = String.Format("SendMessage('{0}', '{1}', '{2}')", Model.Description, Model.Brand, Model.Model), @class = "text-decoration-none btn btn-success text-white" })
+
+
+        </div>
+    </div>
+</div>

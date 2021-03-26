@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Styles/global.css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav class="fixed-top navbar navbar-expand-lg navbar-dark bg-dark justify-content-between ">
+        <div class="d-flex align-content-center">
+            <a class="navbar-brand" href="#">
+                <img src="~/Images/Logo-h.svg" width="250" height="50" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">@Html.ActionLink("Inicio", "Showcase", "Product", null, new { @class = "nav-link" })</li>
+                    @if (User.Identity.IsAuthenticated && HttpContext.Current.User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">@Html.ActionLink("Produtos", "Create", "Product", null, new { @class = "nav-link" })</li>
+                        <li class="nav-item">@Html.ActionLink("Categoria", "Create", "Category", null, new { @class = "nav-link" })</li>
+                        <li class="nav-item">@Html.ActionLink("Usuários", "Index", "User", null, new { @class = "nav-link" })</li>
+                    }
+                </ul>
+                </div>
+            </div>
+                <div class="d-flex text-white justify-content-center align-content-center ">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+
+                        <h3 class="pr-3 ">
+                            @Html.ActionLink(HttpContext.Current.User.Identity.Name, "Details", "User", new { login = HttpContext.Current.User.Identity.Name }, new { @class = "btn btn-dark" })
+                        </h3>
+                        <h3>
+                            @Html.ActionLink("Logout", "Logout", "User", null, new { @class = "btn btn-dark" })
+                        </h3>
+                    }
+                    else
+                    {
+                <h3>
+                    @Html.ActionLink("Login", "Login", "User", null, new { @class = "btn btn-dark" })
+                    @Html.ActionLink("Criar Conta", "Create", "User", null, new { @class = "btn btn-dark" })
+                </h3>
+                    }
+        </div>
+
+    </nav>
+
+    <div class="container body-content">
+        @RenderBody()
+
+        <footer class="fixed-bottom text-white bg-dark d-flex justify-content-center align-items-center">
+            <p>&copy; @DateTime.Now.Year - Mubak by: Irwing, Saulo e Hugo</p>
+        </footer>
+
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

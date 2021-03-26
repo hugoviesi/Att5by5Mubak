@@ -1,0 +1,32 @@
+﻿@model Model.Category
+
+@{
+    ViewBag.Title = "Deletar";
+}
+
+<h2>Deletar Categoria</h2>
+
+<h3>Você tem certeza que deseja deletar isso?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Description)*@
+            Descrição
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Deletar" class="btn btn-danger" /> |
+            @Html.ActionLink("Listar Categorias", "Index")
+        </div>
+    }
+</div>
